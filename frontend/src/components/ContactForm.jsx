@@ -112,7 +112,7 @@ const ContactForm = () => {
                     name="portability_expectations"
                     value={form.portability_expectations}
                     onChange={handleChange}
-                    placeholder="Ex: Quero manter minha distribuidora atual e receber créditos na fatura..."
+                    placeholder="Ex.: Quero que a portabilidade seja o mais fácil e tranquilo. E sem dor de cabeça."
                     rows={2}
                     data-testid="contact-field-portability"
                     className="w-full bg-[#141414] border border-[#27272A] text-white px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-[#FF6B00] transition-colors resize-none"

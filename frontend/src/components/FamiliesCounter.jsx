@@ -9,18 +9,18 @@ const MINI_STATS = [
 ];
 
 const FamiliesCounter = () => {
-  const [displayed, setDisplayed] = useState(300000);
+  const [displayed, setDisplayed] = useState(57860);
   const [animDone, setAnimDone] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  // Count up from 295k to 300k on scroll in
+  // Count up from 55000 to 57860 on scroll in
   useEffect(() => {
     if (!isInView) return;
-    let current = 295000;
-    const target = 300000;
+    let current = 55000;
+    const target = 57860;
     const timer = setInterval(() => {
-      current += 100;
+      current += 30;
       if (current >= target) {
         setDisplayed(target);
         setAnimDone(true);

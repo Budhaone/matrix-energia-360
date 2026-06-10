@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const Calculator = () => {
-  const [bill, setBill] = useState(350);
-  const savings = Math.round(bill * 0.35);
+  const [bill, setBill] = useState(370);
+  const savings = Math.round(bill * 0.10);
   const annualSavings = savings * 12;
   const fiveYearSavings = savings * 60;
 
@@ -28,10 +28,10 @@ const Calculator = () => {
             Simulação Instantânea
           </span>
           <h2 className="font-chivo text-3xl md:text-5xl font-black text-white tracking-tight mt-3">
-            Calcule sua Economia
+            Simulador de Economia
           </h2>
           <p className="text-zinc-500 mt-4 text-base">
-            Arraste o controle e veja quanto você vai economizar por mês
+            Arraste o controle e veja quanto você pode economizar por mês
           </p>
         </motion.div>
 
@@ -53,7 +53,7 @@ const Calculator = () => {
             </div>
             <input
               type="range"
-              min={50}
+              min={370}
               max={5000}
               step={10}
               value={bill}
@@ -63,7 +63,7 @@ const Calculator = () => {
               className="w-full h-2 cursor-pointer bg-[#27272A] rounded-full"
             />
             <div className="flex justify-between text-zinc-600 text-xs mt-2">
-              <span>R$ 50</span>
+              <span>R$ 370</span>
               <span>R$ 5.000</span>
             </div>
           </div>
@@ -102,6 +102,9 @@ const Calculator = () => {
               <ArrowRight size={18} />
             </a>
           </div>
+          <p className="text-center text-zinc-600 text-xs mt-5 leading-relaxed">
+            * Os valores acima são ilustrativos. O desconto real será apurado e oficializado após a análise individual de cada cliente, podendo variar conforme a distribuidora e localidade.
+          </p>
         </motion.div>
       </div>
     </section>

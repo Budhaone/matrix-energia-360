@@ -1,10 +1,11 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Header
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import asyncio
 import logging
+import jwt
 from pathlib import Path
 from pydantic import BaseModel, Field
 from typing import Optional
@@ -29,6 +30,22 @@ if RESEND_API_KEY:
         RESEND_ENABLED = True
     except ImportError:
         pass
+
+ADMIN_JWT_SECRET = os.environ.get('ADMIN_JWT_SECRET', 'change-me-in-env')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'matrix360@2026')
+
+class AdminLogin(BaseModel):
+    password: str
+
+
+def verify_admin(authorization: Optional[str] = Header(None)):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Token requerido")
+    try:
+        jwt.decode(authorization[7:], ADMIN_JWT_SECRET, algorithms=["HS256"])
+    except Exception:
+        raise HTTPException(status_code=401, detail="Token inválido ou expirado")
+
 
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
@@ -109,14 +126,25 @@ async def submit_contact(data: ContactFormCreate):
     return {"status": "success", "message": "Solicitação recebida! Entraremos em contato em breve."}
 
 
+@api_router.post("/admin/auth")
+async def admin_auth(data: AdminLogin):
+    if data.password != ADMIN_PASSWORD:
+        raise HTTPException(status_code=401, detail="Senha incorreta")
+    token = jwt.encode(
+        {"sub": "admin", "exp": datetime.now(timezone.utc) + timedelta(hours=24)},
+        ADMIN_JWT_SECRET, algorithm="HS256"
+    )
+    return {"token": token}
+
+
 @api_router.get("/admin/leads")
-async def get_admin_leads():
+async def get_admin_leads(_=Depends(verify_admin)):
     leads = await db.contact_leads.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
     return leads
 
 
 @api_router.get("/admin/stats")
-async def get_admin_stats():
+async def get_admin_stats(_=Depends(verify_admin)):
     total = await db.contact_leads.count_documents({})
     week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
     this_week = await db.contact_leads.count_documents({"created_at": {"$gte": week_ago}})
