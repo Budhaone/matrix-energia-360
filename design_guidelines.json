@@ -1,0 +1,157 @@
+{
+  "project_name": "Matrix Energia 360 - Landing Page",
+  "theme": "Dark",
+  "archetype": "Archetype 4: Swiss & High-Contrast",
+  "colors": {
+    "primary": "#FF6B00",
+    "background": "#0A0A0A",
+    "surface": "#141414",
+    "surface_light": "#1F1F1F",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#A1A1AA",
+    "border": "#27272A",
+    "accent_white": "#FFFFFF"
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Chivo, sans-serif",
+      "weights": ["800", "900"],
+      "h1": "text-5xl md:text-6xl tracking-tighter leading-none",
+      "h2": "text-3xl md:text-5xl tracking-tight leading-none",
+      "h3": "text-xl md:text-2xl tracking-tight"
+    },
+    "body": {
+      "font_family": "Manrope, sans-serif",
+      "weights": ["300", "400", "500"],
+      "base": "text-base md:text-lg leading-relaxed text-zinc-300",
+      "small": "text-sm text-zinc-400 uppercase tracking-widest"
+    }
+  },
+  "spacing_and_layout": {
+    "philosophy": "High-contrast Swiss grid with generous negative space. Use asymmetry to draw attention.",
+    "section_padding": "py-24 md:py-32",
+    "container": "max-w-7xl mx-auto px-6 md:px-12",
+    "grid_system": "Bento Grid (Mode A: Tetris for marketing visual impact)"
+  },
+  "motion_and_interaction": {
+    "hover_states": "Buttons lift (-translate-y-1) and cast orange glow (shadow-[0_0_20px_rgba(255,107,0,0.4)]). Cards have subtle border lighten.",
+    "scroll_reveal": "Framer motion fade-up with slight y-axis translation. Stagger children in grids.",
+    "marquee": "Use a subtle editorial marquee for 'Zero Investimento • 100% Renovável • Economia Imediata'"
+  },
+  "media_urls": {
+    "logo": "https://assinaturaenergiaeletrica.com.br/wp-content/uploads/2025/12/LOGO-MATRIX360-1024x482.png",
+    "hero_background": "https://images.pexels.com/photos/13219418/pexels-photo-13219418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "family_b2c": "https://images.pexels.com/photos/37409074/pexels-photo-37409074.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "office_b2b": "https://images.pexels.com/photos/9300768/pexels-photo-9300768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "abstract_energy": "https://images.pexels.com/photos/1009033/pexels-photo-1009033.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  },
+  "components_to_use": [
+    "lucide-react (Icons: Zap, Leaf, PiggyBank, ShieldCheck, ChevronDown)",
+    "framer-motion",
+    "Shadcn UI: Accordion (FAQ), Input, Textarea, Button (Form)"
+  ],
+  "sections": [
+    {
+      "name": "Header",
+      "layout": "Fixed/Sticky with glassmorphism (bg-black/80 backdrop-blur-xl border-b border-white/10). Logo on left, navigation hidden on mobile, CTA button 'Simular Economia' on right.",
+      "copy": {
+        "nav_links": ["Como Funciona", "Benefícios", "Dúvidas"],
+        "cta": "Simular Economia"
+      }
+    },
+    {
+      "name": "Hero",
+      "layout": "Massive center text over darkened background image. Image overlay MUST be bg-black/70 to ensure white/orange text contrast. Use 'hero_background'.",
+      "copy": {
+        "overline": "ENERGIA SOLAR POR ASSINATURA",
+        "headline": "Economize até 35% na Conta de Luz Sem Instalar Nada.",
+        "subheadline": "A Matrix Energia 360 conecta você a fazendas solares. Zero investimento inicial. 100% digital. Para sua casa ou empresa.",
+        "cta_primary": "Quero Economizar Agora",
+        "cta_secondary": "Entender o Cálculo"
+      }
+    },
+    {
+      "name": "Marquee",
+      "layout": "Kinetic texture across the screen using framer-motion or react-fast-marquee. Massive outline text.",
+      "copy": {
+        "text": "SEM OBRAS • ZERO INVESTIMENTO • 100% RENOVÁVEL • PORTABILIDADE TOTAL • "
+      }
+    },
+    {
+      "name": "Pain Points",
+      "layout": "Bento Grid (Mode A). Dark surface with stark white typography. Use 'abstract_energy' image in one tall bento cell.",
+      "copy": {
+        "section_title": "Você está pagando caro por uma energia que não é sua.",
+        "points": [
+          {"title": "Tarifas Abusivas", "description": "Bandeiras tarifárias e aumentos constantes corroem seu orçamento."},
+          {"title": "Custo de Painéis", "description": "Instalar energia solar tradicional exige alto investimento e obras na sua casa."},
+          {"title": "Sem Sustentabilidade", "description": "Energia convencional agride o meio ambiente."}
+        ]
+      }
+    },
+    {
+      "name": "How It Works",
+      "layout": "3-column grid. Minimalist lines connecting steps (Tracing Beam vibe).",
+      "copy": {
+        "section_title": "3 Passos para a Liberdade Energética",
+        "steps": [
+          {"step": "01", "title": "Assinatura Digital", "description": "Faça seu cadastro 100% online, sem burocracia e sem taxa de adesão."},
+          {"step": "02", "title": "Injeção na Rede", "description": "Nossas fazendas solares injetam energia limpa direto na rede da sua distribuidora."},
+          {"step": "03", "title": "Desconto na Fatura", "description": "Você recebe os créditos na sua conta atual, economizando até 35% todos os meses."}
+        ]
+      }
+    },
+    {
+      "name": "Benefits",
+      "layout": "2x2 Grid or asymmetric cards. Alternate imagery between 'family_b2c' and 'office_b2b' with solid black cards. Use subtle orange borders on hover.",
+      "copy": {
+        "section_title": "Vantagens que Transformam",
+        "benefits": [
+          {"title": "Economia de 35%", "description": "Redução imediata na sua fatura, sem letras miúdas."},
+          {"title": "Zero Investimento", "description": "Você não compra painéis, não faz obras e não tem custo de manutenção."},
+          {"title": "Energia Limpa", "description": "Contribua para um planeta mais verde consumindo energia 100% renovável."},
+          {"title": "Para CPFs e CNPJs", "description": "Soluções adaptáveis para sua residência ou sua empresa."}
+        ]
+      }
+    },
+    {
+      "name": "FAQ",
+      "layout": "Centered narrow container (max-w-3xl). Minimalist Shadcn Accordions with sharp 1px borders (border-zinc-800).",
+      "copy": {
+        "section_title": "Perguntas Frequentes",
+        "questions": [
+          {"q": "Preciso fazer alguma obra em casa?", "a": "Não. Toda a energia é gerada em nossas fazendas solares e injetada na rede da sua distribuidora atual. Você não instala nenhum equipamento."},
+          {"q": "A distribuidora vai mudar?", "a": "Não. A infraestrutura continua a mesma. Você apenas recebe os créditos energéticos na sua fatura atual."},
+          {"q": "Tem fidelidade ou taxa de cancelamento?", "a": "Nosso modelo garante total portabilidade e liberdade para você."}
+        ]
+      }
+    },
+    {
+      "name": "Contact CTA",
+      "layout": "Massive block (bg-[#FF6B00]) with black typography. High contrast. Two columns: Left is strong copy, Right is a clean, dark-themed Form.",
+      "copy": {
+        "section_title": "Pronto para parar de perder dinheiro?",
+        "subtitle": "Preencha o formulário e nossa equipe entrará em contato para simular sua economia.",
+        "form": {
+          "fields": ["Nome Completo", "Email", "Telefone/WhatsApp", "Valor Médio da Conta"],
+          "submit_button": "Receber Simulação Gratuita",
+          "action_email": "contas@matrixenergia360.com.br"
+        }
+      }
+    },
+    {
+      "name": "Footer",
+      "layout": "py-20 bg-black border-t border-zinc-900. Large logo, essential links, copyright text.",
+      "copy": {
+        "copyright": "© 2026 Matrix Energia 360. Todos os direitos reservados."
+      }
+    }
+  ],
+  "technical_instructions": [
+    "Implement 'data-testid' on all interactive elements (e.g., data-testid='cta-hero-button', data-testid='contact-form-submit').",
+    "Use strict Tailwind classes for colors. Text should be high contrast.",
+    "Must use Chivo (headings) and Manrope (body) via Fontsource or Google Fonts.",
+    "Forms must use Shadcn components. Create a visual success state upon submission to 'contas@matrixenergia360.com.br'.",
+    "Ensure fully responsive layout (mobile-first grid-cols-1)."
+  ]
+}
