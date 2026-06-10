@@ -9,7 +9,7 @@ from pathlib import Path
 from pydantic import BaseModel, Field
 from typing import Optional
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -42,7 +42,8 @@ class ContactFormCreate(BaseModel):
     email: str
     phone: str
     average_bill: str
-    message: Optional[str] = ""
+    portability_expectations: Optional[str] = ""
+    energy_pains: Optional[str] = ""
 
 
 class ContactLead(BaseModel):
@@ -51,7 +52,8 @@ class ContactLead(BaseModel):
     email: str
     phone: str
     average_bill: str
-    message: str = ""
+    portability_expectations: str = ""
+    energy_pains: str = ""
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
@@ -83,8 +85,10 @@ async def submit_contact(data: ContactFormCreate):
                         <td style="padding:10px;border-bottom:1px solid #222;">{data.phone}</td></tr>
                     <tr><td style="padding:10px;border-bottom:1px solid #222;color:#aaa;">Conta Média</td>
                         <td style="padding:10px;border-bottom:1px solid #222;">R$ {data.average_bill}</td></tr>
-                    <tr><td style="padding:10px;color:#aaa;">Mensagem</td>
-                        <td style="padding:10px;">{data.message or 'N/A'}</td></tr>
+                    <tr><td style="padding:10px;border-bottom:1px solid #222;color:#aaa;">Expectativas de Portabilidade</td>
+                        <td style="padding:10px;border-bottom:1px solid #222;">{data.portability_expectations or 'N/A'}</td></tr>
+                    <tr><td style="padding:10px;color:#aaa;">Dores com Energia</td>
+                        <td style="padding:10px;">{data.energy_pains or 'N/A'}</td></tr>
                 </table>
                 <p style="color:#555;font-size:12px;margin-top:24px;">
                     Recebido em {datetime.now(timezone.utc).strftime('%d/%m/%Y %H:%M')} UTC
@@ -103,6 +107,22 @@ async def submit_contact(data: ContactFormCreate):
             logger.error(f"Failed to send email: {e}")
 
     return {"status": "success", "message": "Solicitação recebida! Entraremos em contato em breve."}
+
+
+@api_router.get("/admin/leads")
+async def get_admin_leads():
+    leads = await db.contact_leads.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
+    return leads
+
+
+@api_router.get("/admin/stats")
+async def get_admin_stats():
+    total = await db.contact_leads.count_documents({})
+    week_ago = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+    this_week = await db.contact_leads.count_documents({"created_at": {"$gte": week_ago}})
+    today_start = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0).isoformat()
+    today = await db.contact_leads.count_documents({"created_at": {"$gte": today_start}})
+    return {"total": total, "this_week": this_week, "today": today}
 
 
 app.include_router(api_router)

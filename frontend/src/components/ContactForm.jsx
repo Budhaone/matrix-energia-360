@@ -19,7 +19,7 @@ const PERKS = [
 ];
 
 const ContactForm = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", average_bill: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", average_bill: "", portability_expectations: "", energy_pains: "" });
   const [status, setStatus] = useState("idle");
   const [errMsg, setErrMsg] = useState("");
 
@@ -106,15 +106,29 @@ const ContactForm = () => {
 
                 <div>
                   <label className="text-zinc-400 text-xs uppercase tracking-widest block mb-1.5">
-                    Mensagem (opcional)
+                    Descreva suas expectativas da portabilidade
                   </label>
                   <textarea
-                    name="message"
-                    value={form.message}
+                    name="portability_expectations"
+                    value={form.portability_expectations}
                     onChange={handleChange}
-                    placeholder="Informações adicionais, tipo de imóvel, etc."
-                    rows={3}
-                    data-testid="contact-field-message"
+                    placeholder="Ex: Quero manter minha distribuidora atual e receber créditos na fatura..."
+                    rows={2}
+                    data-testid="contact-field-portability"
+                    className="w-full bg-[#141414] border border-[#27272A] text-white px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-[#FF6B00] transition-colors resize-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-zinc-400 text-xs uppercase tracking-widest block mb-1.5">
+                    Quais suas dores sobre a energia atualmente
+                  </label>
+                  <textarea
+                    name="energy_pains"
+                    value={form.energy_pains}
+                    onChange={handleChange}
+                    placeholder="Ex: Conta muito alta, aumentos constantes, quero alternativa sustentável..."
+                    rows={2}
+                    data-testid="contact-field-energy-pains"
                     className="w-full bg-[#141414] border border-[#27272A] text-white px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-[#FF6B00] transition-colors resize-none"
                   />
                 </div>
