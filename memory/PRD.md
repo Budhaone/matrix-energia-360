@@ -20,7 +20,15 @@ Criar uma landing page para Matrix Energia 360 baseada no site https://assinatur
 - Empresas (CPF/CNPJ) buscando redução de custos energéticos
 - Consumidores conscientes que querem energia renovável sem investimento inicial
 
-## Implementado (2026-02)
+## Implementado (2026-02) - v2
+
+### Novas Features
+- **WhatsApp CTA flutuante** - botão verde fixo com link para (61) 992318338
+- **Novos campos no formulário**: "Descreva suas expectativas da portabilidade" + "Quais suas dores sobre a energia atualmente"
+- **Calculadora de economia** - slider interativo R$50-R$5.000, calcula economia mensal/anual/5 anos em tempo real
+- **Contador ao vivo** - "300.000+ Famílias economizando" com animação e incremento ao vivo
+- **Painel Admin** em `/admin` - lista de leads, stats (total/hoje/7 dias), busca por nome/email/telefone
+- **Email atualizado** - template inclui os novos campos de portabilidade e dores
 
 ### Seções da Landing Page
 1. **Header** - Sticky com glassmorphism, logo Matrix 360, nav links, CTA "Simular Economia"
