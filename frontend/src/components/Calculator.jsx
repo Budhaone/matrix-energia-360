@@ -102,7 +102,7 @@ const Calculator = () => {
               <ArrowRight size={18} />
             </a>
           </div>
-          <p className="text-center text-zinc-600 text-xs mt-5 leading-relaxed">
+          <p className="text-center text-[#FF6B00] text-sm mt-5 leading-relaxed font-medium">
             * Os valores acima são ilustrativos. O desconto real será apurado e oficializado após a análise individual de cada cliente, podendo variar conforme a distribuidora e localidade.
           </p>
         </motion.div>

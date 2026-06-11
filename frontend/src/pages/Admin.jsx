@@ -92,8 +92,8 @@ const Admin = () => {
   const handleLogout = () => { sessionStorage.removeItem("admin_token"); setToken(null); };
 
   const exportCSV = () => {
-    const headers = ["Nome", "Email", "Telefone", "Conta (R$)", "Expectativas de Portabilidade", "Dores com Energia", "Data"];
-    const rows = leads.map((l) => [l.name, l.email, l.phone, l.average_bill, l.portability_expectations || "", l.energy_pains || "", l.created_at]);
+    const headers = ["Nome", "Email", "Telefone", "Conta (R$)", "Cidade/Estado", "Profissão", "Expectativas de Portabilidade", "Dores com Energia", "Data"];
+    const rows = leads.map((l) => [l.name, l.email, l.phone, l.average_bill, l.city_state || "", l.profession || "", l.portability_expectations || "", l.energy_pains || "", l.created_at]);
     const csv = [headers, ...rows].map((r) => r.map((c) => `"${String(c || "").replace(/"/g, '""')}"`).join(",")).join("\n");
     const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
@@ -161,7 +161,7 @@ const Admin = () => {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[#27272A] bg-black/40">
-                  {["Nome", "Email", "Telefone", "Conta (R$)", "Expectativas de Portabilidade", "Dores com Energia", "Data"].map((h) => (
+                  {["Nome", "Email", "Telefone", "Conta (R$)", "Cidade/Estado", "Profissão", "Expectativas", "Dores", "Data"].map((h) => (
                     <th key={h} className="text-left px-4 py-3 text-zinc-500 text-xs uppercase tracking-widest font-medium whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
@@ -181,8 +181,10 @@ const Admin = () => {
                       <div className="flex items-center gap-1"><Phone size={12} className="text-zinc-500 flex-shrink-0" />{lead.phone}</div>
                     </td>
                     <td className="px-4 py-3 text-zinc-300">R$ {lead.average_bill}</td>
-                    <td className="px-4 py-3 text-zinc-400 max-w-[200px]"><div className="truncate" title={lead.portability_expectations}>{lead.portability_expectations || "-"}</div></td>
-                    <td className="px-4 py-3 text-zinc-400 max-w-[200px]"><div className="truncate" title={lead.energy_pains}>{lead.energy_pains || "-"}</div></td>
+                    <td className="px-4 py-3 text-zinc-300 whitespace-nowrap">{lead.city_state || "-"}</td>
+                    <td className="px-4 py-3 text-zinc-300 whitespace-nowrap">{lead.profession || "-"}</td>
+                    <td className="px-4 py-3 text-zinc-400 max-w-[180px]"><div className="truncate" title={lead.portability_expectations}>{lead.portability_expectations || "-"}</div></td>
+                    <td className="px-4 py-3 text-zinc-400 max-w-[180px]"><div className="truncate" title={lead.energy_pains}>{lead.energy_pains || "-"}</div></td>
                     <td className="px-4 py-3 text-zinc-500 whitespace-nowrap text-xs">{formatDate(lead.created_at)}</td>
                   </tr>
                 ))}

@@ -9,7 +9,9 @@ const FIELDS = [
   { name: "name", label: "Nome Completo", type: "text", placeholder: "João Silva" },
   { name: "email", label: "Email", type: "email", placeholder: "joao@email.com" },
   { name: "phone", label: "Telefone / WhatsApp", type: "tel", placeholder: "(11) 99999-9999" },
-  { name: "average_bill", label: "Valor Médio da Conta de Luz (R$)", type: "text", placeholder: "Ex: 350" },
+  { name: "average_bill", label: "Valor Médio da Conta de Luz (R$)", type: "text", placeholder: "Ex: 370" },
+  { name: "city_state", label: "Cidade / Estado", type: "text", placeholder: "Ex: Brasília - DF" },
+  { name: "profession", label: "Profissão", type: "text", placeholder: "Ex: Empresário, Professor, Médico..." },
 ];
 
 const PERKS = [
@@ -19,7 +21,7 @@ const PERKS = [
 ];
 
 const ContactForm = () => {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", average_bill: "", portability_expectations: "", energy_pains: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", average_bill: "", city_state: "", profession: "", portability_expectations: "", energy_pains: "" });
   const [status, setStatus] = useState("idle");
   const [errMsg, setErrMsg] = useState("");
 
@@ -88,7 +90,7 @@ const ContactForm = () => {
               <form onSubmit={handleSubmit} data-testid="contact-form" className="space-y-4">
                 {FIELDS.map((field) => (
                   <div key={field.name}>
-                    <label className="text-zinc-400 text-xs uppercase tracking-widest block mb-1.5">
+                    <label className="text-zinc-200 text-xs uppercase tracking-widest block mb-1.5 font-bold">
                       {field.label}
                     </label>
                     <input
@@ -105,7 +107,7 @@ const ContactForm = () => {
                 ))}
 
                 <div>
-                  <label className="text-zinc-400 text-xs uppercase tracking-widest block mb-1.5">
+                  <label className="text-zinc-200 text-xs uppercase tracking-widest block mb-1.5 font-bold">
                     Descreva suas expectativas da portabilidade
                   </label>
                   <textarea
@@ -119,7 +121,7 @@ const ContactForm = () => {
                   />
                 </div>
                 <div>
-                  <label className="text-zinc-400 text-xs uppercase tracking-widest block mb-1.5">
+                  <label className="text-zinc-200 text-xs uppercase tracking-widest block mb-1.5 font-bold">
                     Quais suas dores sobre a energia atualmente
                   </label>
                   <textarea

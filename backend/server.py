@@ -61,6 +61,8 @@ class ContactFormCreate(BaseModel):
     average_bill: str
     portability_expectations: Optional[str] = ""
     energy_pains: Optional[str] = ""
+    city_state: Optional[str] = ""
+    profession: Optional[str] = ""
 
 
 class ContactLead(BaseModel):
@@ -71,6 +73,8 @@ class ContactLead(BaseModel):
     average_bill: str
     portability_expectations: str = ""
     energy_pains: str = ""
+    city_state: str = ""
+    profession: str = ""
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
@@ -104,8 +108,12 @@ async def submit_contact(data: ContactFormCreate):
                         <td style="padding:10px;border-bottom:1px solid #222;">R$ {data.average_bill}</td></tr>
                     <tr><td style="padding:10px;border-bottom:1px solid #222;color:#aaa;">Expectativas de Portabilidade</td>
                         <td style="padding:10px;border-bottom:1px solid #222;">{data.portability_expectations or 'N/A'}</td></tr>
-                    <tr><td style="padding:10px;color:#aaa;">Dores com Energia</td>
-                        <td style="padding:10px;">{data.energy_pains or 'N/A'}</td></tr>
+                    <tr><td style="padding:10px;border-bottom:1px solid #222;color:#aaa;">Dores com Energia</td>
+                        <td style="padding:10px;border-bottom:1px solid #222;">{data.energy_pains or 'N/A'}</td></tr>
+                    <tr><td style="padding:10px;border-bottom:1px solid #222;color:#aaa;">Cidade / Estado</td>
+                        <td style="padding:10px;border-bottom:1px solid #222;">{data.city_state or 'N/A'}</td></tr>
+                    <tr><td style="padding:10px;color:#aaa;">Profissão</td>
+                        <td style="padding:10px;">{data.profession or 'N/A'}</td></tr>
                 </table>
                 <p style="color:#555;font-size:12px;margin-top:24px;">
                     Recebido em {datetime.now(timezone.utc).strftime('%d/%m/%Y %H:%M')} UTC
