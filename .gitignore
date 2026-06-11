@@ -31,3 +31,8 @@ tests/
 .emergent/
 memory/
 scripts/
+.env.*
+credentials.json
+*.pem
+*.key
+.credentials
