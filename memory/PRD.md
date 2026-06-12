@@ -12,7 +12,7 @@ Criar uma landing page para Matrix Energia 360 baseada no site https://assinatur
 ## Arquitetura
 - **Frontend**: React + TailwindCSS + Framer Motion + Shadcn UI
 - **Backend**: FastAPI + MongoDB (armazena leads)
-- **Email**: Resend SDK (condicional ao RESEND_API_KEY)
+- **Email**: Resend SDK
 - **Fontes**: Chivo (headings) + Manrope (body) via Google Fonts
 
 ## Personas Alvo
@@ -20,51 +20,60 @@ Criar uma landing page para Matrix Energia 360 baseada no site https://assinatur
 - Empresas (CPF/CNPJ) buscando redução de custos energéticos
 - Consumidores conscientes que querem energia renovável sem investimento inicial
 
-## Implementado (2026-02) - v2
+## Implementado (2026-02)
 
-### Novas Features
-- **WhatsApp CTA flutuante** - botão verde fixo com link para (61) 992318338
-- **Novos campos no formulário**: "Descreva suas expectativas da portabilidade" + "Quais suas dores sobre a energia atualmente"
-- **Calculadora de economia** - slider interativo R$50-R$5.000, calcula economia mensal/anual/5 anos em tempo real
-- **Contador ao vivo** - "300.000+ Famílias economizando" com animação e incremento ao vivo
-- **Painel Admin** em `/admin` - lista de leads, stats (total/hoje/7 dias), busca por nome/email/telefone
-- **Email atualizado** - template inclui os novos campos de portabilidade e dores
+### Features
+- Landing page completa (Hero, Marquee, Pain Points, How It Works, Benefits, FAQ, Contact Form, Footer)
+- WhatsApp CTA flutuante — (61) 992318338
+- Calculadora de economia interativa (slider R$50-R$5.000)
+- Contador ao vivo "300.000+ Famílias economizando"
+- Painel Admin em `/admin` com JWT, lista de leads, stats, busca, exportação CSV
+- Email via Resend com template HTML completo
+- Campos extras: cidade/estado, profissão, expectativas, dores
+- Favicon SVG personalizado (laranja/preto)
+- Título da aba: "Matrix Energia 360 | Economize até 35% na Conta de Luz"
+- Badge "Made with Emergent" removido
 
-### Seções da Landing Page
-1. **Header** - Sticky com glassmorphism, logo Matrix 360, nav links, CTA "Simular Economia"
-2. **Hero** - Fullscreen com headline "Economize até 35% na Conta de Luz Sem Instalar Nada.", stats (35%, R$ 0, 100%), dois CTAs
-3. **Marquee** - Faixa laranja animada com "SEM OBRAS • ZERO INVESTIMENTO • 100% RENOVÁVEL • PORTABILIDADE TOTAL"
-4. **Pain Points** - Bento grid com as 3 dores do cliente + stat "+200%"
-5. **Como Funciona** - 3 passos com ícones (Assinatura Digital, Injeção na Rede, Desconto na Fatura)
-6. **Benefícios** - 4 cards (Economia 35%, Zero Investimento, Energia Limpa, Casa e Empresa)
-7. **FAQ** - Shadcn Accordion com 6 perguntas frequentes
-8. **Formulário de Contato** - Seção laranja com form que salva no MongoDB
-9. **Footer** - Logo, links, email de contato
+### Deploy — matrixenergia360 (PRODUÇÃO)
+- **Frontend**: https://matrix-energia-360.vercel.app → contas.matrixenergia360.com.br
+- **Backend**: https://matrix-energia-360.onrender.com
+- **GitHub**: Budhaone/matrix-energia-360
+- **DB**: MongoDB Atlas — DB_NAME: matrix_energia_360
 
-### Backend
-- `POST /api/contact` - Salva leads no MongoDB, envia email via Resend se API key configurada
-- Modelo `ContactLead` com campos: name, email, phone, average_bill, message, created_at
+### Deploy — matrix360brasil (PRODUÇÃO)
+- **Frontend**: https://matrix360brasil.vercel.app → contas.matrix360brasil.com.br
+- **Backend**: https://matrix360brasil.onrender.com
+- **GitHub**: Budhaone/matrix360brasil
+- **DB**: MongoDB Atlas — DB_NAME: matrix360brasil
+- **WhatsApp**: (11) 984732980
+- **Email leads**: contas@matrix360brasil.com.br
 
-## Backlog Priorizado
+## Variáveis de Ambiente
 
-### P0 (Crítico - não implementado)
-- N/A (MVP completo)
+### Render (backend) — matrixenergia360
+- MONGO_URL: string do MongoDB Atlas
+- DB_NAME: matrix_energia_360
+- CORS_ORIGINS: *
+- RESEND_API_KEY: re_PrVrtF7c_B7iJ3D2TWz3pfFfq5wFt18ks
+- SENDER_EMAIL: onboarding@resend.dev
+- ADMIN_JWT_SECRET: 1151b6d660862b15aaa0da287e16f434b227822739c88368fee77ff2dfe4f2c8
+- ADMIN_PASSWORD: matrix360@2026
 
-### P1 (Alta prioridade - próxima iteração)
-- Configurar RESEND_API_KEY para envio de emails real
-- Página de admin para visualizar leads captados
-- WhatsApp CTA flutuante
+### Render (backend) — matrix360brasil
+- MONGO_URL: string do MongoDB Atlas (mesma)
+- DB_NAME: matrix360brasil
+- CORS_ORIGINS: *
+- RESEND_API_KEY: re_PrVrtF7c_B7iJ3D2TWz3pfFfq5wFt18ks
+- SENDER_EMAIL: onboarding@resend.dev
+- ADMIN_JWT_SECRET: 1151b6d660862b15aaa0da287e16f434b227822739c88368fee77ff2dfe4f2c8
+- ADMIN_PASSWORD: matrix360@2026
 
-### P2 (Melhorias futuras)
-- Calculadora de economia interativa
+### Vercel (frontend)
+- matrixenergia360: REACT_APP_BACKEND_URL=https://matrix-energia-360.onrender.com
+- matrix360brasil: REACT_APP_BACKEND_URL=https://matrix360brasil.onrender.com
+
+## Backlog / Futuras Melhorias
 - Depoimentos de clientes reais
-- Animações de scroll mais elaboradas
 - SEO meta tags e Open Graph
 - Google Analytics / pixel tracking
-- A/B testing de headlines
-
-## Próximas Tarefas
-1. Configurar Resend para envio de emails (usuário precisa criar conta em resend.com)
-2. Adicionar RESEND_API_KEY ao backend/.env
-3. Criar página admin para ver leads
-4. Configurar domínio personalizado
+- Configurar domínio verificado no Resend para envio profissional de emails
