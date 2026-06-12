@@ -122,7 +122,7 @@ async def submit_contact(data: ContactFormCreate):
             """
             params = {
                 "from": SENDER_EMAIL,
-                "to": ["contas@matrix360brasil.com.br"],
+                "to": ["contas@matrixenergia360.com.br"],
                 "subject": f"Novo Lead: {data.name} - Matrix Energia 360",
                 "html": html_content,
             }
