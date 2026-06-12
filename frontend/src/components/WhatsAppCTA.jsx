@@ -1,6 +1,6 @@
 const WhatsAppCTA = () => (
   <a
-    href="https://wa.me/5561992318338?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20economia%20de%20energia%20com%20a%20Matrix%20Energia%20360."
+    href="https://wa.me/5511984732980?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20economia%20de%20energia%20com%20a%20Matrix%20Energia%20360."
     target="_blank"
     rel="noopener noreferrer"
     data-testid="whatsapp-cta-btn"
