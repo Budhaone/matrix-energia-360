@@ -8,19 +8,28 @@ const LoginForm = ({ onLogin }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [slow, setSlow] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setSlow(false);
+    const slowTimer = setTimeout(() => setSlow(true), 5000);
     try {
-      const { data } = await axios.post(`${API}/admin/auth`, { password });
-      sessionStorage.setItem("admin_token", data.token);
+      const { data } = await axios.post(`${API}/admin/auth`, { password }, { timeout: 60000 });
+      clearTimeout(slowTimer);
       onLogin(data.token);
-    } catch {
-      setError("Senha incorreta. Tente novamente.");
+    } catch (err) {
+      clearTimeout(slowTimer);
+      if (err.code === "ECONNABORTED" || err.message?.includes("timeout")) {
+        setError("Servidor demorando para responder. Tente novamente em 30 segundos.");
+      } else {
+        setError("Senha incorreta. Tente novamente.");
+      }
     }
     setLoading(false);
+    setSlow(false);
   };
 
   return (
@@ -40,9 +49,10 @@ const LoginForm = ({ onLogin }) => {
             placeholder="Senha do painel" required data-testid="admin-password-input"
             className="w-full bg-[#0A0A0A] border border-[#27272A] text-white px-4 py-3 text-sm placeholder-zinc-600 focus:outline-none focus:border-[#FF6B00] transition-colors" />
           {error && <p className="text-red-400 text-sm" data-testid="admin-login-error">{error}</p>}
+          {slow && !error && <p className="text-yellow-500 text-xs text-center">Servidor acordando... aguarde até 30 segundos.</p>}
           <button type="submit" disabled={loading} data-testid="admin-login-submit"
             className="w-full bg-[#FF6B00] text-black font-black py-3 text-sm hover:-translate-y-0.5 hover:shadow-[0_4px_20px_rgba(255,107,0,0.3)] transition-all duration-200 disabled:opacity-70 font-chivo">
-            {loading ? "Verificando..." : "Entrar no Painel"}
+            {loading ? (slow ? "Aguardando servidor..." : "Verificando...") : "Entrar no Painel"}
           </button>
         </form>
       </div>
@@ -61,7 +71,7 @@ const StatCard = ({ label, value, Icon, color }) => (
 );
 
 const Admin = () => {
-  const [token, setToken] = useState(sessionStorage.getItem("admin_token"));
+  const [token, setToken] = useState(null);
   const [leads, setLeads] = useState([]);
   const [stats, setStats] = useState({ total: 0, today: 0, this_week: 0 });
   const [loading, setLoading] = useState(true);
@@ -89,7 +99,7 @@ const Admin = () => {
 
   useEffect(() => { load(); }, [load]);
 
-  const handleLogout = () => { sessionStorage.removeItem("admin_token"); setToken(null); };
+  const handleLogout = () => { setToken(null); };
 
   const exportCSV = () => {
     const headers = ["Nome", "Email", "Telefone", "Conta (R$)", "Cidade/Estado", "Profissão", "Expectativas de Portabilidade", "Dores com Energia", "Data"];
