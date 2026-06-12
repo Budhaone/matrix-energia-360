@@ -21,6 +21,7 @@ db = client[os.environ['DB_NAME']]
 
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '').strip()
 SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'onboarding@resend.dev')
+NOTIFICATION_EMAIL = os.environ.get('NOTIFICATION_EMAIL', 'contas@matrixenergia360.com.br')
 RESEND_ENABLED = False
 
 if RESEND_API_KEY:
@@ -122,7 +123,7 @@ async def submit_contact(data: ContactFormCreate):
             """
             params = {
                 "from": SENDER_EMAIL,
-                "to": ["contas@matrixenergia360.com.br"],
+                "to": [NOTIFICATION_EMAIL],
                 "subject": f"Novo Lead: {data.name} - Matrix Energia 360",
                 "html": html_content,
             }
