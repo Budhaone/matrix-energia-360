@@ -49,12 +49,12 @@ const Footer = () => (
             Contato
           </h4>
           <a
-            href="mailto:contas@matrixenergia360.com.br"
+            href="mailto:contas@matrix360brasil.com.br"
             className="flex items-center gap-2 text-[#FF6B00] hover:text-orange-400 transition-colors text-sm font-medium"
             data-testid="footer-email-link"
           >
             <Mail size={16} />
-            contas@matrixenergia360.com.br
+            contas@matrix360brasil.com.br
           </a>
           <p className="text-zinc-600 text-sm mt-3 leading-relaxed">
             Nossa equipe responde em até 24 horas úteis.
