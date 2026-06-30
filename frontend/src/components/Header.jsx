@@ -25,16 +25,12 @@ const Header = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2" data-testid="header-logo">
-          <div className="w-8 h-8 bg-[#FF6B00] flex items-center justify-center flex-shrink-0">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-5 h-5">
-              <path d="M6 26 L11 8 L16 18 L21 8 L26 26" stroke="black" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="text-white font-black text-sm tracking-wider" style={{ fontFamily: "'Chivo', sans-serif" }}>MATRIX</span>
-            <span className="text-[#FF6B00] font-black text-xs tracking-widest" style={{ fontFamily: "'Chivo', sans-serif" }}>ENERGIA 360</span>
-          </div>
+        <a href="/" className="flex items-center" data-testid="header-logo">
+          <img
+            src="https://customer-assets.emergentagent.com/job_matrix-360-contact/artifacts/0uqz86ke_LOGO%20MATRIX360.png"
+            alt="Matrix Energia 360"
+            className="h-10 w-auto"
+          />
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
