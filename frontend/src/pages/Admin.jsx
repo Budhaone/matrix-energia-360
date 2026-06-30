@@ -36,7 +36,7 @@ const LoginForm = ({ onLogin }) => {
     <div className="bg-[#0A0A0A] min-h-screen flex items-center justify-center" style={{ fontFamily: "'Manrope', sans-serif" }}>
       <div className="bg-[#141414] border border-[#27272A] p-10 w-full max-w-sm">
         <div className="text-center mb-8">
-          <img src="https://assinaturaenergiaeletrica.com.br/wp-content/uploads/2025/12/LOGO-MATRIX360-1024x482.png"
+          <img src="https://customer-assets.emergentagent.com/job_matrix-360-contact/artifacts/0uqz86ke_LOGO%20MATRIX360.png"
             alt="Matrix" className="h-10 w-auto mx-auto mb-6" />
           <div className="w-12 h-12 bg-[#FF6B00]/10 flex items-center justify-center mx-auto mb-4">
             <Lock size={22} className="text-[#FF6B00]" />
@@ -128,7 +128,7 @@ const Admin = () => {
     <div className="bg-[#0A0A0A] min-h-screen" style={{ fontFamily: "'Manrope', sans-serif" }}>
       <header className="bg-black border-b border-[#27272A] px-6 py-4 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center gap-4">
-          <img src="https://assinaturaenergiaeletrica.com.br/wp-content/uploads/2025/12/LOGO-MATRIX360-1024x482.png" alt="Matrix" className="h-8 w-auto" />
+          <img src="https://customer-assets.emergentagent.com/job_matrix-360-contact/artifacts/0uqz86ke_LOGO%20MATRIX360.png" alt="Matrix" className="h-8 w-auto" />
           <span className="text-zinc-600 text-sm hidden sm:block">/ Painel Administrativo</span>
         </div>
         <div className="flex items-center gap-3">
